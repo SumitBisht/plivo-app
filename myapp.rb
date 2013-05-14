@@ -30,7 +30,7 @@ post '/call/' do
 	api_obj = settings.restAPI
 	call_params = {'to' => to_num, 'from' => from_no, 'answer' => answer, 'answer_method' => 'GET'}
 	response = api_obj.make_call(call_params)
-	'call made with following response: '+ response
+	'call made with following response: '+ response.to_s
 end
 
 get '/call' do
