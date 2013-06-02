@@ -1,14 +1,17 @@
 require 'sinatra'
+require 'sinatra/base'
 require 'plivo'
 include Plivo
 
-base_url = 'http://localhost:4567/'
-AUTH_ID = "SAZGE1Y2QXNDI5MWFMOW"
-AUTH_TOKEN = "SAZGE1Y2QXNDI5MWFMOW"
+class MyApp < Sinatra::Base
+
+@base_url = 'http://localhost:4567/'
+@AUTH_ID = "SAZGE1Y2QXNDI5MWFMOW"
+@AUTH_TOKEN = "SAZGE1Y2QXNDI5MWFMOW"
 
 configure do
 	# The Rest API uses the default values for url and version numbers
-	set :restAPI, RestAPI.new(AUTH_ID, AUTH_TOKEN)
+	set :restAPI, RestAPI.new(@AUTH_ID, @AUTH_TOKEN)
 end
 
 get '/details' do
@@ -65,4 +68,5 @@ post '/transcribe' do
 	content_type 'text/xml'
 	res.to_xml()
 end
-
+run! if app_file == $0
+end
